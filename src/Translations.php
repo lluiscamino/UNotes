@@ -29,9 +29,9 @@ class Translations {
     
     public function get(string $translationCode): string {
         if (isset($this->translationsArray[$translationCode])) {
-            return html_entity_decode($this->translationsArray[$translationCode]);
+            return $this->translationsArray[$translationCode];
         }
-        throw new \Exception('Language code not valid.');
+        throw new \Exception('Translation not available.' . $translationCode);
     }
 }
 

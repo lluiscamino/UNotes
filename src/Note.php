@@ -50,13 +50,25 @@ class Note {
     }
     
     private function setValuesArray(): void {
-        if ($stmt = $this->mysqli->prepare('SELECT author_id, title, description, category, subcategory, text_content, num_views FROM notes WHERE id = ? LIMIT 1')) {
+        if ($stmt = $this->mysqli->prepare('SELECT id, author_id, title, description, category, subcategory, text_content, num_views FROM notes WHERE id = ? LIMIT 1')) {
             $stmt->bind_param('i', $this->id);
             $stmt->execute();
             $result = $stmt->get_result();
             $this->values = $result->fetch_array(MYSQLI_ASSOC);
             $result->free();
             $stmt->close();
+        } else {
+            throw new \Exception('A mySQLi error ocurred.');
+        }
+    }
+    
+    public function addView(): bool {
+        if ($stmt = $this->mysqli->prepare('UPDATE notes SET num_views = ? WHERE id = ?')) {
+            $this->numViews++;
+            $stmt->bind_param('ii', $this->numViews, $this->id);
+            $status = $stmt->execute();
+            $stmt->close();
+            return $status;
         } else {
             throw new \Exception('A mySQLi error ocurred.');
         }
