@@ -2,5 +2,10 @@
 use src\Note;
 require 'util/includes.php';
 
-$note = new Note($mysqli, (int)$_GET['noteid']);
-echo $templates->render('pages::note', array('valueArray'   =>  $note->getValueArray()));
+try {
+    $note = new Note($mysqli, (int)$_GET['noteid']);
+    $note->addView();
+    echo $templates->render('pages::note', array('valueArray'  =>  $note->getValueArray()));
+} catch(Exception $e) {
+    echo $templates->render('pages::nonote', array());
+}

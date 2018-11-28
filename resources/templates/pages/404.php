@@ -1,4 +1,10 @@
-<?php $this->layout('global::template', ['subtitle' => $this->e($this->getTr('404ERROR'))]) ?>
-<h2><?php echo $this->e($this->getTr('404ERROR')); ?></h2>
+<?php
+$this->layout('global::template', array(
+    'subtitle' => $this->e($this->getTr('404ERROR')),
+    'navigation'    =>  $this->e($this->getTr('INDEX')) . ', ' . $this->e($this->getTr('404ERROR')),
+    'navigationLinks'   =>  'index'
+));
+echo '<h2>' . $this->e($this->getTr('404ERROR')) .'</h2>
 The requested page was not found on this server.<br>
-Please, return to the <a href="index">index</a>.
+' . $this->e($this->getTr('RETURNINDEX')) . '.';
+?>

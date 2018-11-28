@@ -18,3 +18,22 @@ html {
 .card-deck .card {
   min-width: 220px;
 }
+#share-link {
+	display: inline;
+	width: 50%;
+	height: 24px;
+	margin-left: 1%;
+}
+#copy-button {
+	height: 24px;
+	padding-top: 0px;
+	margin-top: -5px;
+	margin-left: 8px;
+}
+#note-views {
+	float: right;
+	font-size: 14px;
+}
+#rounded-image {
+	border-radius: 4px;
+}
