@@ -1,0 +1,19 @@
+## deny access to some file types
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>
+## rewrite url
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^notes/(.*)$ note.php?noteid=$1&%1
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+## disable directory browsing
+Options All -Indexes
+## error pages
+# htaccess custom error pages
+ErrorDocument 400 /404.php
+ErrorDocument 401 /404.php
+ErrorDocument 403 /404.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /404.php

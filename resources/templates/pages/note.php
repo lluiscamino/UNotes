@@ -1,0 +1,1 @@
+<?php $this->layout('global::template', ['subtitle' => $this->e($valueArray['title'])]) ?>
