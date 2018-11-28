@@ -7,6 +7,7 @@ require 'vendor/autoload.php';
 require 'src\Language.php';
 require 'src\Translations.php';
 require 'src\Note.php';
+require 'src\File.php';
 
 $templates = new League\Plates\Engine();
 $templates->addFolder('global', 'resources/templates/global');
