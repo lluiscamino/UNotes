@@ -42,7 +42,7 @@ class Note {
         if ($stmt = $this->mysqli->prepare('SELECT author_id, title, description, category, subcategory, text_content, num_views, num_files FROM notes WHERE id = ? LIMIT 1')) {
             $stmt->bind_param('i', $this->id);
             $stmt->execute();
-            $stmt->bind_result($this->author_id, $this->title, $this->description, $this->category, $this->subcategory, $this->textContent, $this->numViews, $this->numFiles);
+            $stmt->bind_result($this->authorId, $this->title, $this->description, $this->category, $this->subcategory, $this->textContent, $this->numViews, $this->numFiles);
             $stmt->fetch();
             $stmt->close();
         } else {
