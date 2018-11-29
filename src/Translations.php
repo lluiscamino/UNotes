@@ -24,7 +24,11 @@ class Translations {
     }
     
     private function getTranslationsArray(): array {
-        return parse_ini_file($this->langFile);
+        $ini = parse_ini_file($this->langFile);
+        if ($ini !== false) {
+            return $ini;
+        }
+        throw new \Exception('INI file error.');
     }
     
     public function get(string $translationCode): string {
