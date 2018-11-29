@@ -20,6 +20,17 @@
         echo $this->e($valueArray['text_content']) !== '' ? $this->e($valueArray['text_content']) : '<i>' . $this->e($this->getTr('NOCONTENT')) . '.</i>';
     ?>
     <hr>
-    <h5 class="card-title"><?php echo $this->e($this->getTr('FILES')); ?></h5>
+    <?php
+    echo '<h5 class="card-title">' . $this->e($this->getTr('FILES')) . '</h5>';
+    if ($this->e($valueArray['num_files'] !== 0)) {
+        echo '<ul id="file-list">';
+        foreach ($this->e($files) as $file) {
+            echo '<li><a title="' . $this->getTr('OPENFILE') . '" href="' . $file['url'] . '" target="_blank" style="text-decoration: none"><span class="border"><img alt="' . $file['extension'] .'" class="file-icon" src="resources/images/icons/' . $file['extension'] .'.png"> ' . $file['file_name'] . '.' . $file['extension'] . '</span></a>';
+        }
+        echo '</ul>';
+    } else {
+        echo '<i>' . $this->getTr('NO_FILES') . '.</i>';
+    }
+    ?>
   </div>
 </div>
