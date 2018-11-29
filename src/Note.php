@@ -11,6 +11,7 @@ class Note {
     private $category;
     private $subcategory;
     private $textContent;
+    private $numFiles;
     private $numViews;
     private $values;
 
@@ -38,10 +39,10 @@ class Note {
     }
     
     private function setValues(): void {
-        if ($stmt = $this->mysqli->prepare('SELECT author_id, title, description, category, subcategory, text_content, num_views FROM notes WHERE id = ? LIMIT 1')) {
+        if ($stmt = $this->mysqli->prepare('SELECT author_id, title, description, category, subcategory, text_content, num_views, num_files FROM notes WHERE id = ? LIMIT 1')) {
             $stmt->bind_param('i', $this->id);
             $stmt->execute();
-            $stmt->bind_result($this->author_id, $this->title, $this->description, $this->category, $this->subcategory, $this->textContent, $this->numViews);
+            $stmt->bind_result($this->author_id, $this->title, $this->description, $this->category, $this->subcategory, $this->textContent, $this->numViews, $this->numFiles);
             $stmt->fetch();
             $stmt->close();
         } else {
@@ -50,7 +51,7 @@ class Note {
     }
     
     private function setValuesArray(): void {
-        if ($stmt = $this->mysqli->prepare('SELECT id, author_id, title, description, category, subcategory, text_content, num_views FROM notes WHERE id = ? LIMIT 1')) {
+        if ($stmt = $this->mysqli->prepare('SELECT id, author_id, title, description, category, subcategory, text_content, num_views, num_files FROM notes WHERE id = ? LIMIT 1')) {
             $stmt->bind_param('i', $this->id);
             $stmt->execute();
             $result = $stmt->get_result();

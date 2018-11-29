@@ -37,3 +37,18 @@ html {
 #rounded-image {
 	border-radius: 4px;
 }
+#file-list {
+	list-style-type: none;
+	padding: 0px;
+}
+#file-list li {
+	margin-right: 8px;
+	display: inline-block;
+}
+#file-list li .border {
+	padding: 3px;
+}
+.file-icon {
+    width: 16px;
+    height: 16px;
+}
