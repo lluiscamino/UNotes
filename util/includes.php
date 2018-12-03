@@ -8,6 +8,7 @@ require 'src\Language.php';
 require 'src\Translations.php';
 require 'src\Note.php';
 require 'src\File.php';
+require 'src\Category.php';
 
 $templates = new League\Plates\Engine();
 $templates->addFolder('global', 'resources/templates/global');

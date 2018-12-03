@@ -63,6 +63,17 @@ class Note {
         }
     }
     
+    public static function upload($mysqli, string $title, string $description, string $textContent, int $authorId, int $numFiles, int $category, string $subcategory): self {
+        if ($stmt = $mysqli->prepare('INSERT INTO notes (title, description, text_content, author_id, num_files, category, subcategory, creation_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())')) {
+             $stmt->bind_param('sssssss', $title, $description, $textContent, $authorId, $numFiles, $category, $subcategory);
+             $stmt->execute();
+             $obj = new Note($mysqli, $stmt->insert_id);
+             $stmt->close();
+             return $obj;
+         }
+         throw new \Exception('A mySQLi error ocurred.');
+    }
+    
     public function addView(): bool {
         if ($stmt = $this->mysqli->prepare('UPDATE notes SET num_views = ? WHERE id = ?')) {
             $this->numViews++;
