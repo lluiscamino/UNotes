@@ -3,7 +3,7 @@
     'navigation'    =>  $this->e($this->getTr('INDEX')) . ', ' . $this->e($this->getTr('UPLOAD')),
     'navigationLinks'   =>  'index'
 ));
-echo '<h2>' . $this->e($this->getTr('UPLOAD_NOTE')). '</h2>';
+echo '<h2>' . $this->e($this->getTr('UPLOAD_NOTE')) . '</h2>';
 ?>
 <form method="post">
 <div class="form-group">

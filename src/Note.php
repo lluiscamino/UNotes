@@ -13,6 +13,7 @@ class Note {
     private $textContent;
     private $numFiles;
     private $numViews;
+    private $creationDate;
     private $values;
 
     public function __construct($mysqli, int $id) {
@@ -39,10 +40,10 @@ class Note {
     }
     
     private function setValues(): void {
-        if ($stmt = $this->mysqli->prepare('SELECT author_id, title, description, category, subcategory, text_content, num_views, num_files FROM notes WHERE id = ? LIMIT 1')) {
+        if ($stmt = $this->mysqli->prepare('SELECT author_id, title, description, category, subcategory, text_content, num_views, num_files, creation_date FROM notes WHERE id = ? LIMIT 1')) {
             $stmt->bind_param('i', $this->id);
             $stmt->execute();
-            $stmt->bind_result($this->authorId, $this->title, $this->description, $this->category, $this->subcategory, $this->textContent, $this->numViews, $this->numFiles);
+            $stmt->bind_result($this->authorId, $this->title, $this->description, $this->category, $this->subcategory, $this->textContent, $this->numViews, $this->numFiles, $this->creationDate);
             $stmt->fetch();
             $stmt->close();
         } else {
@@ -51,7 +52,7 @@ class Note {
     }
     
     private function setValuesArray(): void {
-        if ($stmt = $this->mysqli->prepare('SELECT id, author_id, title, description, category, subcategory, text_content, num_views, num_files FROM notes WHERE id = ? LIMIT 1')) {
+        if ($stmt = $this->mysqli->prepare('SELECT id, author_id, title, description, category, subcategory, text_content, num_views, num_files, creation_date FROM notes WHERE id = ? LIMIT 1')) {
             $stmt->bind_param('i', $this->id);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -65,11 +66,11 @@ class Note {
     
     public static function upload($mysqli, string $title, string $description, string $textContent, int $authorId, int $numFiles, int $category, string $subcategory): self {
         if ($stmt = $mysqli->prepare('INSERT INTO notes (title, description, text_content, author_id, num_files, category, subcategory, creation_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())')) {
-             $stmt->bind_param('sssssss', $title, $description, $textContent, $authorId, $numFiles, $category, $subcategory);
-             $stmt->execute();
-             $obj = new Note($mysqli, $stmt->insert_id);
-             $stmt->close();
-             return $obj;
+            $stmt->bind_param('sssssss', $title, $description, $textContent, $authorId, $numFiles, $category, $subcategory);
+            $stmt->execute();
+            $obj = new Note($mysqli, $stmt->insert_id);
+            $stmt->close();
+            return $obj;
          }
          throw new \Exception('A mySQLi error ocurred.');
     }
