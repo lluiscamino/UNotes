@@ -85,10 +85,21 @@
     echo $this->section('content')
     ?>
       <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
           <div class="col-12 col-md">
             <img class="mb-2" src="resources/images/favicons//favicon-24x24.png" alt="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>" width="24" height="24">
             <small class="d-block mb-3 text-muted">&copy; 2018 <?php echo $this->e($this->getTr('SITE_TITLE')); ?></small>
           </div>
+          <div class="col-6 col-md" style="margin-left: -480px;">
+            <h5><?php echo $this->e($this->getTr('LINKS'))?></h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="notes/1"><?php echo $this->e($this->getTr('EXAMPLE'))?></a></li>
+              <li><a class="text-muted" href="upload"><?php echo $this->e($this->getTr('UPLOAD'))?></a></li>
+              <li><a class="text-muted" href="about"><?php echo $this->e($this->getTr('ABOUT'))?></a></li>
+              <li><a class="text-muted" href="signup"><?php echo $this->e($this->getTr('SIGNUP'))?></a></li>
+            </ul>
+          </div>
+        </div>
       </footer>
     </div>
   </body>
