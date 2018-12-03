@@ -3,11 +3,20 @@
     'navigation'    =>  $this->e($this->getTr('INDEX')) . ', ' . $this->e($this->getTr('NOTES')) .', ' . $this->e($valueArray['title']),
     'navigationLinks'   =>  'index, index'
     ))?>
-<h2><?php echo $this->e($valueArray['title']);?></h2>
+<h2><?php 
+echo $this->e($valueArray['title']);
+// checks if note was published in the last 5 minutes
+if (time() - strtotime($valueArray['creation_date']) <= 300) {
+    echo ' <span class="badge badge-success">New</span>';
+}
+?></h2>
 <div class="card">
   <div class="card-body">
     <?php echo $this->e($valueArray['description']);?>
-    <div id="note-views"><img src="resources/images/icons/eye.png"> <?php echo $this->e($valueArray['num_views']) .  ' ' . $this->e($this->getTr('VIEWS'));?></div>
+    <div id="note-info">
+      <img src="resources/images/icons/eye.png"> <?php echo $this->e($valueArray['num_views']) .  ' ' . $this->e($this->getTr('VIEWS'));?> 
+      <img src="resources/images/icons/calendar.png"> <?php echo date("d/m/Y h:i", strtotime($this->e($valueArray['creation_date'])));?>
+    </div>
     <hr>
     <?php echo $this->e($this->getTr('SHARENOTES')); ?>: <input type="text" class="form-control" id="share-link" value="<?php echo $_SERVER['REQUEST_URI'];?>/notes/<?php echo $this->e($valueArray['id']);?>" readonly> <button type="button" class="btn btn-outline-primary" id="copy-button">Copy</button>
   </div>
