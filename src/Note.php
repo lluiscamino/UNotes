@@ -66,7 +66,11 @@ class Note {
     
     public static function upload($mysqli, string $title, string $description, string $textContent, int $authorId, int $numFiles, int $category, string $subcategory): self {
         if ($stmt = $mysqli->prepare('INSERT INTO notes (title, description, text_content, author_id, num_files, category, subcategory, creation_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())')) {
-            $stmt->bind_param('sssssss', $title, $description, $textContent, $authorId, $numFiles, $category, $subcategory);
+            require './vendor/erusev/parsedown/Parsedown.php';
+            $parsedown = new \Parsedown();
+            $parsedown->setSafeMode(true);
+            $parsedown->setMarkupEscaped(true);
+            $stmt->bind_param('sssssss', $title, $description, $parsedown->text($textContent), $authorId, $numFiles, $category, $subcategory);
             $stmt->execute();
             $obj = new Note($mysqli, $stmt->insert_id);
             $stmt->close();
