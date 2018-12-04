@@ -1,5 +1,5 @@
 <?php $this->layout('global::template', array(
-    'subtitle'  =>  $this->e($this->getTr('SIGNUP')),
+    'subtitle'  =>  $this->e($this->getTr('UPLOAD_NOTE')),
     'navigation'    =>  $this->e($this->getTr('INDEX')) . ', ' . $this->e($this->getTr('UPLOAD')),
     'navigationLinks'   =>  'index'
 ));
@@ -30,8 +30,13 @@ foreach ($this->e($categoryTrCodes) as $i => $category) {
 </div>
 <div class="form-group">
 <label for="content"><?php echo $this->e($this->getTr('TEXT'))?></label>
-<textarea id="content" name="content" class="form-control" placeholder="<?php echo $this->e($this->getTr('EXTEXT'))?>" rows="6" required></textarea>
+<textarea id="content" name="content" class="form-control" placeholder="<?php echo $this->e($this->getTr('EXTEXT'))?>" rows="6"></textarea>
 </div>
 <input type="submit" class="btn btn-primary mb-2" name="publish" value="<?php echo $this->e($this->getTr('PUBLISH'))?>">
 <input type="reset" class="btn btn-secondary mb-2" value="<?php echo $this->e($this->getTr('RESET'))?>">
 </form>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+var simplemde = new SimpleMDE({ element: document.getElementById('content') });
+</script>
