@@ -15,7 +15,7 @@
     transform: translateY(100%);
     transition: all 500ms ease-out;
     color: #ecf0f1;
-    background: #212327 url('resources/images/backgrounds/cookie_alert_bg.png');
+    background: #212327 url('../images/backgrounds/cookies_alert_bg.png');
 }
 
 .cookiealert.show {
