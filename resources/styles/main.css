@@ -52,3 +52,6 @@ html {
     width: 16px;
     height: 16px;
 }
+#loadcaptcha {
+	text-align: center;
+}
