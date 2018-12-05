@@ -37,6 +37,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+	<!-- Bootstrap cookie alert -->
+	<link rel="stylesheet" href="resources/styles/cookiealert.css">
+	<script src="resources/scripts/cookiealert.js"></script>
+
     <!-- Custom styles -->
     <link href="resources/styles/main.css" rel="stylesheet">
     
@@ -45,6 +49,10 @@
   </head>
 
   <body>
+  <div class="alert text-center cookiealert" role="alert">
+    <?php echo $this->e($this->getTr('COOKIEMSG')); ?>
+    <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close"><?php echo $this->e($this->getTr('OK')); ?></button>
+	</div>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal"><a title="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>" style="text-decoration: none; color: initial" href="index"><img src="resources/images/logos/logo_small.png" alt="Logo"> <?php echo $this->e($this->getTr('SITE_TITLE')); ?></a></h5>
       <nav class="my-2 my-md-0 mr-md-3">
