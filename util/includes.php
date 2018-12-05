@@ -2,17 +2,20 @@
 use src\Translations;
 use src\Language;
 
+$dir = 'C:\xampp\htdocs\UNotes\\';
+
 require 'db_connection.php';
-require 'vendor/autoload.php';
-require 'src\Language.php';
-require 'src\Translations.php';
-require 'src\Note.php';
-require 'src\File.php';
-require 'src\Category.php';
+require $dir . 'vendor\autoload.php';
+require $dir . 'src\Language.php';
+require $dir . 'src\Translations.php';
+require $dir . 'src\Note.php';
+require $dir . 'src\File.php';
+require $dir . 'src\Category.php';
+require $dir . 'src\Captcha.php';
 
 $templates = new League\Plates\Engine();
-$templates->addFolder('global', 'resources/templates/global');
-$templates->addFolder('pages', 'resources/templates/pages');
+$templates->addFolder('global', $dir . 'resources\templates\global');
+$templates->addFolder('pages', $dir . 'resources\templates\pages');
 $templates->registerFunction('getTr', function(string $trCode): string {
     $language = new Language(Language::getLanguage());
     $language->setCookie();
