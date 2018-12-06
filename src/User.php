@@ -36,6 +36,10 @@ class User {
         return $this->values;
     }
     
+    public function destroySession(): void {
+        unset($_SESSION[self::SESSION_NAME]);
+    }
+    
     public static function register($mysqli, string $name, string $email, string $password): self {
         if ($stmt = $mysqli->prepare('INSERT INTO people (name, email, password, account_created) VALUES (?, ?, ?, NOW())')) {
             $password = password_hash($password, PASSWORD_DEFAULT);
