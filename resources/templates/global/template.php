@@ -158,7 +158,16 @@
               <li><a class="text-muted" href="notes/1"><?php echo $this->e($this->getTr('EXAMPLE'))?></a></li>
               <li><a class="text-muted" href="upload"><?php echo $this->e($this->getTr('UPLOAD'))?></a></li>
               <li><a class="text-muted" href="about"><?php echo $this->e($this->getTr('ABOUT'))?></a></li>
-              <li><a class="text-muted" href="signup"><?php echo $this->e($this->getTr('SIGNUP'))?></a></li>
+              <?php
+               if (!$this->e($this->isLogged())) {
+               ?>
+               <li><a class="text-muted" href="signup"><?php echo $this->e($this->getTr('SIGNUP'))?></a></li>
+              <?php 
+               } else {
+               ?>
+               <li><a class="text-muted" href="logout"><?php echo $this->e($this->getTr('PROFILE_LOGOUT'))?></a></li>
+               <?php
+               }?>
             </ul>
           </div>
         </div>

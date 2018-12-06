@@ -12,4 +12,6 @@ if (!User::isLogged() && isset($_POST['signin'])) {
     } else {
         header('Location: ' . $_POST['url'] . 'loginerror=1');
     }
+} else {
+    header('Location: index');
 }
