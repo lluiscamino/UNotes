@@ -39,5 +39,9 @@ class Captcha {
     public function createSession(): void {
         $_SESSION[self::SESSION_NAME] = $this->code;
     }
+    
+    public static function destroySession(): void {
+        unset($_SESSION[self::SESSION_NAME]);
+    }
 }
 

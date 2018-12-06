@@ -2,6 +2,8 @@
 use src\Translations;
 use src\Language;
 
+session_start();
+
 $dir = 'C:\xampp\htdocs\UNotes\\';
 
 require 'db_connection.php';
@@ -11,6 +13,8 @@ require $dir . 'src\Translations.php';
 require $dir . 'src\Note.php';
 require $dir . 'src\File.php';
 require $dir . 'src\Category.php';
+require $dir . 'src\User.php';
+require $dir . 'src\UserRegistration.php';
 require $dir . 'src\Captcha.php';
 
 $templates = new League\Plates\Engine();
