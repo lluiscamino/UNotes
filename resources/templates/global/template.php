@@ -56,23 +56,77 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal"><a title="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>" style="text-decoration: none; color: initial" href="index"><img src="resources/images/logos/logo_small.png" alt="Logo"> <?php echo $this->e($this->getTr('SITE_TITLE')); ?></a></h5>
       <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark dropdown-toggle" href="#"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="p-2 text-dark dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <?php
         echo $this->e($this->getTr('LANGUAGES'));
-        $actualUrl=strtok($_SERVER["REQUEST_URI"],'?');
-        $actualUrl=strtok($actualUrl,'&');
-        unset($_GET['lang']);
-        $actualUrl .= (count($_GET) > 0) ? '&' : '?';
+        $loginError = isset($_GET['loginerror']) ? $_GET['loginerror'] : 0;
+        function getActualUrl(): string {
+            $actualUrl=strtok($_SERVER['REQUEST_URI'], '?');
+            $actualUrl=strtok($actualUrl, '&');
+            unset($_GET['lang']);
+            unset($_GET['loginerror']);
+            $actualUrl .= (count($_GET) > 0) ? '&' : '?';
+            return $actualUrl;
+        }
         ?>
       </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="<?php echo $actualUrl?>lang=en"><?php echo $this->e($this->getTr('ENGLISH')); ?></a>
-        <a class="dropdown-item" href="<?php echo $actualUrl; ?>lang=es"><?php echo $this->e($this->getTr('SPANISH')); ?></a>
+        <a class="dropdown-item" href="<?php echo getActualUrl()?>lang=en"><?php echo $this->e($this->getTr('ENGLISH')); ?></a>
+        <a class="dropdown-item" href="<?php echo getActualUrl();?>lang=es"><?php echo $this->e($this->getTr('SPANISH')); ?></a>
       </div>
         <a class="p-2 text-dark" href="notes/1"><?php echo $this->e($this->getTr('EXAMPLE')); ?></a>
         <a class="p-2 text-dark" href="about"><?php echo $this->e($this->getTr('ABOUT')); ?></a>
       </nav>
-      <a class="btn btn-outline-primary" href="signup"><?php echo $this->e($this->getTr('SIGNUP')); ?></a>
+      <?php
+      if (!$this->e($this->isLogged())) {
+      ?>
+      <div class="btn-group">
+        <a class="btn btn-outline-primary" href="signup"><?php echo $this->e($this->getTr('SIGNUP')); ?></a>
+        <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#login-box"><?php echo $this->e($this->getTr('SIGNIN')); ?></a>
+      </div>
+      <div class="modal" id="login-box">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><?php echo $this->e($this->getTr('SIGNIN')); ?></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form method="post" action="login">
+              <?php 
+              if ($loginError == 1) {
+                  echo '<div class="alert alert-danger" role="alert">' . $this->e($this->getTr('INVALID_SIGNIN')) . '</div>';
+              }
+              ?>
+                <div class="form-group">
+        	      <input type="email" id="email" name="login-email" class="form-control" placeholder="<?php echo $this->e($this->getTr('MAIL_SIGNUP'))?>" maxlength="320" autofocus required>
+                </div>
+                <div class="form-group">
+        	      <input type="password" id="password" name="login-password" class="form-control" placeholder="<?php echo $this->e($this->getTr('PASS_SIGNUP'))?>" autofocus required>
+                </div>
+                <input type="hidden" name="url" value="<?php echo getActualUrl()?>">
+                <input type="submit" class="btn btn-lg btn-block btn-primary" name="signin" value="<?php echo $this->e($this->getTr('SUBMIT_SIGNUP'))?>">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php
+      } else {
+      ?>
+      <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><?php echo $this->e($this->getLoggedUserData('name')); ?></button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#"><?php echo $this->e($this->getTr('PROFILE_PROFILE')); ?></a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="logout"><?php echo $this->e($this->getTr('PROFILE_LOGOUT'));?></a>
+        </div>
+      </div>
+      <?php
+      }
+      ?>
     </div>
     <div class="container">
     <?php
@@ -104,11 +158,25 @@
               <li><a class="text-muted" href="notes/1"><?php echo $this->e($this->getTr('EXAMPLE'))?></a></li>
               <li><a class="text-muted" href="upload"><?php echo $this->e($this->getTr('UPLOAD'))?></a></li>
               <li><a class="text-muted" href="about"><?php echo $this->e($this->getTr('ABOUT'))?></a></li>
-              <li><a class="text-muted" href="signup"><?php echo $this->e($this->getTr('SIGNUP'))?></a></li>
+              <?php
+               if (!$this->e($this->isLogged())) {
+               ?>
+               <li><a class="text-muted" href="signup"><?php echo $this->e($this->getTr('SIGNUP'))?></a></li>
+              <?php 
+               } else {
+               ?>
+               <li><a class="text-muted" href="logout"><?php echo $this->e($this->getTr('PROFILE_LOGOUT'))?></a></li>
+               <?php
+               }?>
             </ul>
           </div>
         </div>
       </footer>
-    </div>
+    </div>   
+    <?php 
+    if ($loginError == 1) {
+        echo '<script>$("#login-box").modal();</script>';
+    }
+    ?>
   </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 use src\Translations;
 use src\Language;
+use src\User;
 
 session_start();
 
@@ -15,6 +16,7 @@ require $dir . 'src\File.php';
 require $dir . 'src\Category.php';
 require $dir . 'src\User.php';
 require $dir . 'src\UserRegistration.php';
+require $dir . 'src\UserConnection.php';
 require $dir . 'src\Captcha.php';
 
 $templates = new League\Plates\Engine();
@@ -25,4 +27,16 @@ $templates->registerFunction('getTr', function(string $trCode): string {
     $language->setCookie();
     $translations = new Translations($language->code);
     return $translations->get($trCode);
+});
+$templates->registerFunction('isLogged', function(): bool {
+    return User::isLogged();
+});
+$templates->registerFunction('getLoggedUserData', function(string $code) {
+    if (User::isLogged()) {
+        require 'db_connection.php';
+        $loggedUser = new User($mysqli, $_SESSION[User::SESSION_NAME]);
+        return $loggedUser->getValuesArray()[$code];
+    } else {
+        throw \Exception('User is not logged.');
+    }
 });
