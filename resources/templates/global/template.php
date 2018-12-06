@@ -54,7 +54,7 @@
     <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close"><?php echo $this->e($this->getTr('OK')); ?></button>
 	</div>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal"><a title="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>" style="text-decoration: none; color: initial" href="index"><img src="resources/images/logos/logo_small.png" alt="Logo"> <?php echo $this->e($this->getTr('SITE_TITLE')); ?></a></h5>
+    <span class="my-0 mr-md-auto font-weight-normal"><a title="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>" style="text-decoration: none; color: initial" href="index"><img src="resources/images/logos/logo_small.png" alt="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>" title="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>"></a></span>
       <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <?php
@@ -149,7 +149,7 @@
       <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
           <div class="col-12 col-md">
-            <img class="mb-2" src="resources/images/favicons//favicon-24x24.png" alt="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>" width="24" height="24">
+            <img class="mb-2" src="resources/images/logos/cloud_small.png" alt="<?php echo $this->e($this->getTr('SITE_TITLE')); ?>" width="24" height="24">
             <small class="d-block mb-3 text-muted">&copy; 2018 <?php echo $this->e($this->getTr('SITE_TITLE')); ?></small>
           </div>
           <div class="col-6 col-md" style="margin-left: -480px;">
