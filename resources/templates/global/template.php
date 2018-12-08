@@ -119,7 +119,7 @@
       <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><?php echo $this->e($this->getLoggedUserData('name')); ?></button>
         <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#"><?php echo $this->e($this->getTr('PROFILE_PROFILE')); ?></a>
+          <a class="dropdown-item" href="profile/<?php echo $this->e($this->getLoggedUserData('id')); ?>"><?php echo $this->e($this->getTr('PROFILE_PROFILE')); ?></a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="logout"><?php echo $this->e($this->getTr('PROFILE_LOGOUT'));?></a>
         </div>

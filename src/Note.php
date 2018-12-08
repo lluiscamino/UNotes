@@ -34,7 +34,7 @@ class Note {
             $stmt->store_result();
             $numRows = $stmt->num_rows;
             $stmt->close();
-            return  $numRows === 1 ? true : false;
+            return  $numRows === 1;
         }
         throw new \Exception('A mySQLi error ocurred.');
     }
@@ -62,6 +62,21 @@ class Note {
         } else {
             throw new \Exception('A mySQLi error ocurred.');
         }
+    }
+    
+    public static function getNotesByUser($mysqli, int $userId) {
+        if ($stmt = $mysqli->prepare('SELECT id, title, description, text_content, num_views, num_files, category, subcategory, creation_date FROM notes WHERE author_id = ?')) {
+            $array = array();
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $array[] = $row;
+            }
+            $stmt->close();
+            return $array;
+        }
+        throw new \Exception('A mySQLi error ocurred.');
     }
     
     public static function upload($mysqli, string $title, string $description, string $textContent, int $authorId, int $numFiles, int $category, string $subcategory): self {

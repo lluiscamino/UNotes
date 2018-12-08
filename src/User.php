@@ -24,6 +24,9 @@ class User {
             $this->values = $result->fetch_array(MYSQLI_ASSOC);
             $result->free();
             $stmt->close();
+            $this->values['num_notes'] = count(Note::getNotesByUser($this->mysqli, $this->id));
+            $this->values['num_files'] = 0;
+            $this->values['num_friends'] = 0;
         } else {
             throw new \Exception('A mySQLi error ocurred.');
         }
