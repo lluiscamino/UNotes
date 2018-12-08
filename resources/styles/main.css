@@ -31,8 +31,9 @@ html {
 	margin-left: 8px;
 }
 #note-info {
-	float: right;
 	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: -6px;
 }
 #rounded-image {
 	border-radius: 4px;
