@@ -1,12 +1,1 @@
-  document.addEventListener('DOMContentLoaded', function() {
-	  var copyButton = document.getElementById('copy-button');
-	  if (copyButton !== null) {
-		  copyButton.addEventListener('click', function(){
-			    var inputLink = document.getElementById('share-link');
-			    if (inputLink !== null) {
-			    	inputLink.select();
-			    	document.execCommand("copy");
-			    }
-		  });
-	  }
-  });
+document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("copy-button");null!==e&&e.addEventListener("click",function(){var e=document.getElementById("share-link");null!==e&&(e.select(),document.execCommand("copy"))})});
