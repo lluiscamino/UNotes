@@ -1,6 +1,6 @@
 <?php
 use src\Captcha;
-require '..\..\util\includes.php';
+require '../../util/includes.php';
 
 $code = isset($_GET['code']) && $_GET['code'] !== '' ? $_GET['code'] : 'ERROR';
 $captchaImgInfo = Captcha::generateImage($code);
